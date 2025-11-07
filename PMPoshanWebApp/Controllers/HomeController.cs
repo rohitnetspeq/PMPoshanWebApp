@@ -11,16 +11,21 @@ namespace PMPoshanWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IEmisApiClient _emisApiClient;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, IEmisApiClient emisApiClient)
+        public HomeController(ILogger<HomeController> logger, IEmisApiClient emisApiClient, IConfiguration configuration)
         {
             _logger = logger;
             _emisApiClient = emisApiClient;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
-            
+            var webUrl = _configuration["EmisApi:WebUrl"];
+            // Pass it to the view via ViewData or ViewBag or in your model
+            ViewData["WebFileBaseUrl"] = webUrl;
+
             var banners = await _emisApiClient.GetAllBanners();
             var aboutUsContent = await _emisApiClient.GetCMSContentByName("About Us");
             var cmContent = await _emisApiClient.GetCMSContentByName("Hon'ble Chief Minister");
@@ -43,6 +48,9 @@ namespace PMPoshanWebApp.Controllers
                 Links = links,
                 Notification = notification
             };
+
+
+           
 
             return View(model);
         }

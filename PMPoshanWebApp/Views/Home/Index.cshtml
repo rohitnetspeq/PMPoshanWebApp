@@ -1,4 +1,5 @@
 ﻿@using System.Net
+@using System.IO
 @model PMPoshanWebApp.Integrations.EMIS.Models.HomePageViewModel
 @{
     ViewData["Title"] = "Home Page";
@@ -278,6 +279,9 @@
             <h2 class="text-3xl font-bold text-primary md:text-4xl">
                 Notifications
             </h2>
+            <!-- Using ViewData -->
+          
+
             <div class="mt-6 space-y-4">
 
                 @if (Model.Notification?.NotificationList != null && Model.Notification.NotificationList.Any())
@@ -300,8 +304,14 @@
                                 Click below to view full notification/document.
                             </p>
 
+                            @* <a class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent"
+                               href="@Url.Action("Download", "File", new { fileName = Path.GetFileName(item.FilePath) })" target="_blank" rel="noopener noreferrer">
+                                Read More →
+                            </a> *@
+
+
                             <a class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent"
-                               href="@item.FilePath" target="_blank" rel="noopener noreferrer">
+                               href="@ViewData["WebFileBaseUrl"]@item.FilePath" target="_blank" rel="noopener noreferrer">
                                 Read More →
                             </a>
                         </div>
