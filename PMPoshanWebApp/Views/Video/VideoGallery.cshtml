@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Video Gallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<main class="flex flex-col gap-4 py-6 px-2 sm:px-4">
+    <!-- Breadcrumbs -->
+    <div class="flex flex-wrap gap-2">
+        <a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary"
+           href="#">Home</a>
+        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span>
+        <a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary"
+           href="#">Video Gallery</a>
+        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span>
+        <span class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">
+            Annual
+            School Nutrition Fair 2023
+        </span>
+    </div>
+    <!-- PageHeading -->
+    <div class="flex flex-wrap justify-between gap-3">
+        <div class="flex min-w-72 flex-col gap-2">
+            <p class="text-3xl font-bold text-primary md:text-4xl">
+                Annual School Nutrition Fair 2023
+            </p>
+
+        </div>
+    </div>
+    <!-- ImageGrid adapted for Video -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-4">
+        <!-- Video Card 1 -->
+        <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                 data-alt="Video thumbnail for Inauguration Ceremony"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQ9o0dUlo65REU9WWICA3JFWZQyYefKtkysnkoQYW7l47LEsJmtQrc6I5afXNxRHwrFuD7EAVAhTPMH3ksxoPs16Y5MC5w68gZQ9stGZPzf8bM7AOktsiDGTiuNHvOjQX3eGCUHVFv-fXLTJKJ-6OcmCBR9VjugOrgpR_FZOW2gc2NBpSb1PDQkAXT2CgiPSgPV0RNn0jkig72T4TVjTee3V7pdCnxAT_z1vk800pvPj4dFqmHvFbZuPy2XIP6zooDxtfBLjfkEVby");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 p-4">
+                <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                    Inauguration
+                    Ceremony
+                </p>
+            </div>
+        </div>
+        <!-- Video Card 2 -->
+        <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                 data-alt="Video thumbnail for Kitchen Hygiene Standards"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4ZFVYwPiT7Zp8l0ZZo5m-WUUdzR7iXnX6-4GOLQguwVGt5CvqTdqR1iBke3Ibkx1O5ai3DO555oH0uPxgEXg-Ha6mmwL2tftYJk3hPo_y9yWdqs-XLqCityCBPIhZMDojH1ySahrw6Ybd5OgLLuYlBq6h-4opwVJduKdT8_Sv9Z1DpNEJQT4qsnVC-jalzmoJRhHU3k5XfWx4DDDg7DA538uQikrAITJq8C0LAgvjOVr2XWq41EqSUzBoQxcXkMW1_iglYx2OkUp5");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 p-4">
+                <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                    Kitchen Hygiene
+                    Standards
+                </p>
+            </div>
+        </div>
+        <!-- Video Card 3 -->
+        <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                 data-alt="Video thumbnail for Vegetable Sourcing &amp; Cleaning"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA79wZd-lPHUhA7vrgj8AT75hv8mtJif30jG8fjMja9kJzAjomAbi79Vn2PfRG0xuOxuI8OkKLqJVDs3fh4DQW7_1okNwa0ZgInPMmVoFFPKxiHbBkS1JBAlbJ62GNJsiF72qkWivIQH8D6OcQRLXyr7C-2ELdhX2CCxhkmkEoaXGYQy_XQQF81ijOoAMEuGSTLfVOSoEMIKmnz-deXdYHiH6I1Ziu8QbI7veG2npT8FdEnbTZk6tqVmWVywuijMQa2s9T2ygK7aJmb");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 p-4">
+                <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                    Vegetable
+                    Sourcing &amp; Cleaning
+                </p>
+            </div>
+        </div>
+        <!-- Video Card 4 -->
+        <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                 data-alt="Video thumbnail for Cooking Demonstration"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuByZa2WTRyJdjm44RuqLizhwaWCwnGT7ExoVjzw_rsQCARlWx_oTH3o38T7lnD23HWqmRVwUy6StLxNBNbEAZb8L-1TtuW7uDg0bwfamsX67Jzhv9o2fYJwnsjF6V8As0AaY62Q_Yfle-mRnmkaHR-5EEhyPX0JLs-fV8s_GKqHAFgIetQOBn5cxu5N2XpCkx6VpmPcoBpC_forf2Lb0vIM5x2fBmIqaATUiz03qG95FXcaIbO-b-qk7h1CPnxH0czg2nitvnnad3eK");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 p-4">
+                <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                    Cooking
+                    Demonstration
+                </p>
+            </div>
+        </div>
+        <!-- Video Card 5 -->
+        <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                 data-alt="Video thumbnail for Serving the Mid-Day Meal"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQXZk0Uqy6GNSuSK1fGlHTDGcqUnaFyUox0pT-yA5WjEmto8QWUtDNwqoTKubWAYFNVLqsQXBGxB96zvKK7xcC9PNtPoUtIVBmGXrHH3HspVSV91K_8BEKgfLBBcJvx6I-j5MM-21tKW1VUgTbIkCVlkjzukziY43P0xXGt80NHUDVWh93D8BCMhyKTGVeh02bKvp4tL9R1yAK3PniFqvAbdjvWrRK5wBt2-Aq_eEjfJYEjn7VcwZIeFzU6pxLLiTnZ8_K9vhOb9cN");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 p-4">
+                <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                    Serving the
+                    Mid-Day Meal
+                </p>
+            </div>
+        </div>
+        <!-- Video Card 6 -->
+        <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                 data-alt="Video thumbnail for Student Nutrition Quiz"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBdht55v0CNaOJnIwDCR7yacUhtfrieb2d-ckRVr78SbH3njIsih6hhXQcv2ElF-la1YQybEeonQZH-VJMrCsRMgeDcrUsDda42ZTbE4VdlHdbsxj3S7lvwBQvjtxGlYmDoAHicHa78v3Ds7XAQIl70J0nmS6mWerayXmb-ArsDyRJZ1gfRhi0ckoZal83zDvlNOaSqnlY4yVrK3DyaDNchUrbIEY-eE4wcP1D3BplKjokzOMlUZIw8UTO3rVYbu3ndJaIc5TR3p3Rg");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 p-4">
+                <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                    Student
+                    Nutrition Quiz
+                </p>
+            </div>
+        </div>
+        <!-- Video Card 7 -->
+        <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                 data-alt="Video thumbnail for Parent-Teacher Meet"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAdxqTKBkSG0xFhGxMYsvkrypAzxFsIfhZ18KsK_87zP4hTBlYSlXJJQgnW0nYYt_C0mJ0jbnw23jaG_WDa4Tpzy37u_57XNYzPwiUjF1eZVPyz4gHTp8PmNUWEpL4YnG6hQ0_nGNaTNQGyTQdGqv5bYgGuao73wCPVAGb-Ml9bTycylthWNfFx5T2rTzbe-1JNOsS0sgtgZ5NblhgIizxQQadXle3eqCZRyL3lal0y-yIGQtGiYc6DkOc-96gZ3DRo9P9oowAGjcrO");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 p-4">
+                <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                    Parent-Teacher
+                    Meet
+                </p>
+            </div>
+        </div>
+        <!-- Video Card 8 -->
+        <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                 data-alt="Video thumbnail for Award Distribution"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYuqdYlbPoeCaPbuRR-luQJefd3WdZjSvflPJg6uI8I8etdJK0OJlETKolOD3HTzPK31ya1Fe7gTw0sRRCd1w-tbY81O-0Bd9COxbTecfDRm1A98vaqhW937VLiI4JfiUnPlljc71sdDUky3SPh1od7tyn3grFh07z-e9UbxnwAotthclryWJwUpA2m74mnEYPfchY2fbMLe-9HX-aIIlIuJdLMIcgTg_TvSW58asZWcQxwIJx03o2XwYnwiVpY855_B0aMqhOmZZw");'>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                    <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 p-4">
+                <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                    Award
+                    Distribution
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Pagination -->
+    <div class="flex items-center justify-center p-4">
+        <a class="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
+           href="#">
+            <span class="material-symbols-outlined text-lg">chevron_left</span>
+        </a>
+        <a class="text-sm font-bold leading-normal tracking-[0.015em] flex size-10 items-center justify-center text-white dark:text-gray-900 rounded-lg bg-primary"
+           href="#">1</a>
+        <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
+           href="#">2</a>
+        <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
+           href="#">3</a>
+        <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
+           href="#">4</a>
+        <a class="text-sm font-normal leading-normal flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
+           href="#">5</a>
+        <a class="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
+           href="#">
+            <span class="material-symbols-outlined text-lg">chevron_right</span>
+        </a>
+    </div>
+</main>

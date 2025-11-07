@@ -1,0 +1,16 @@
+﻿@import "tailwindcss";
+
+@theme {
+    --color-primary: #0d47a1;
+    --color-accent: #fb8c00;
+    --color-background-light: #ffffff;
+    --color-background-alt: #f5f5f5;
+    --color-text-body: #2f4f4f;
+/**/
+    --font-display: "Poppins", sans-serif;
+
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}

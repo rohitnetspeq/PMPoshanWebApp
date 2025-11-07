@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PMPoshanWebApp.Integrations.EMIS.Models.BannerViewModel>
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 5px;
+        background: #ffffff80; 
+        opacity: 1;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        margin: 0 6px !important;
+        backdrop-filter: blur(2px);
+    }
+
+    .swiper-pagination-bullet-active {
+        width: 28px;
+        border-radius: 16px;
+        background: #ffffff; 
+    }
+</style>
+
+<section id="home" class="relative min-h-[60vh] md:min-h-[80vh] overflow-hidden">
+
+    <!-- Swiper -->
+    <div class="swiper heroSwiper h-full w-full">
+
+        <div class="swiper-wrapper">
+
+            @foreach (var banner in Model)
+            {
+                <div class="swiper-slide relative flex min-h-[60vh] md:min-h-[80vh] flex-col items-center justify-center gap-6 p-4 text-center overflow-hidden">
+
+                    <!-- Image  -->
+                    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform transition-transform duration-75 hero-parallax"
+                         style="background-image: url('@banner.BannerThumb');">
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="swiper-pagination"></div>
+
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    const swiper = new Swiper(".heroSwiper", {
+        loop: true,
+        autoplay: { delay: 8000 },
+        pagination: { el: ".swiper-pagination", clickable: true },
+        speed: 900,
+        effect: "fade"
+    });
+</script>
+
+
+@* 
+
+<section id="home"
+         class="relative flex min-h-[60vh] md:min-h-[80vh] flex-col items-center justify-center gap-6 p-4 text-center overflow-hidden">
+
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform transition-transform duration-75 hero-parallax"
+         style="background-image:
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+        url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4EcbukBcCEtaKT_VBSK-LoXzVGg6YvUeqBUQNaCa9njA5Bsy8TR-o_ZBqdN4IO17dvgO5edetgMBGFm4PJWnBl0c27HbXu5Cod7GwYCP5jO_RFzilaiR6QVccGjNgHOuxi6kclYdZOAnZOGoH0Lyf3kIf5zys0aGRPooXi0A1mmQfa92_o_63DG6jYm-NAQ0fe_Hzsbe1LVHDsumgNkpyoQNUBKqHixh9G8XpCh4prKWsUzibaQ5ESBHV5cn1wolAtauuEmfGExop');">
+    </div>
+
+    <div class="relative flex flex-col items-center gap-4 z-[2]">
+        <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tight text-white">
+            Nourishing Sikkim's Future
+        </h1>
+        <p class="max-w-2xl text-base md:text-lg font-normal leading-normal text-white/90">
+            Ensuring health and education through nutritious mid-day meals.
+        </p>
+    </div>
+
+    <button class="relative z-[2] flex h-12 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl px-5 bg-accent text-white text-base font-bold leading-normal tracking-wide transition-transform hover:scale-105">
+        <span class="truncate">Learn More</span>
+    </button>
+</section>
+
+ *@

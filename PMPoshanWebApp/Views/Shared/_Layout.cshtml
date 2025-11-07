@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PM Poshan</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @* <link rel="stylesheet" href="~/PMPoshanWebApp.styles.css" asp-append-version="true" /> *@
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+
+    <!-- Poppins font family -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Material Symbols Outlined icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+</head>
+<body>
+
+   
+
+
+    <div class="bg-background-light text-text-body font-display">
+        <div class="relative flex min-h-screen w-full flex-col"  >
+            @await Html.PartialAsync("_pvMenuRibbon")
+            @await Html.PartialAsync("_pvMenu")
+           
+                @RenderBody()
+
+
+         
+        </div>
+    </div>
+
+    @await Html.PartialAsync("_pvFooter")
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
