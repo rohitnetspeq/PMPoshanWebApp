@@ -20,12 +20,8 @@ namespace PMPoshanWebApp.Controllers
             _configuration = configuration;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int eventPage = 1, int notificationPage = 1)
         {
-            var webUrl = _configuration["EmisApi:WebUrl"];
-            // Pass it to the view via ViewData or ViewBag or in your model
-            ViewData["WebFileBaseUrl"] = webUrl;
-
             var banners = await _emisApiClient.GetAllBanners();
             var aboutUsContent = await _emisApiClient.GetCMSContentByName("About Us");
             var cmContent = await _emisApiClient.GetCMSContentByName("Hon'ble Chief Minister");
@@ -35,7 +31,11 @@ namespace PMPoshanWebApp.Controllers
             var approachesContent = await _emisApiClient.GetCMSContentByName("Approaches");
             var objectivesContent = await _emisApiClient.GetCMSContentByName("Objectives");
             var links = await _emisApiClient.GetAllLinks();
-            var notification = await _emisApiClient.GetNotificationPaged(1,2,"");
+            var notification = await _emisApiClient.GetNotificationPaged(notificationPage, 5, "");
+            var events = await _emisApiClient.GetEventsPaged(eventPage, 5, "");
+            var photoAlbum = await _emisApiClient.GetPhotoAlbumsPaged(1, 4, "");
+            var videoAlbum = await _emisApiClient.GetVideoAlbumsPaged(1, 4, "");
+
             var model = new HomePageViewModel {
                 Banners = banners,
                 AboutUs = aboutUsContent,
@@ -46,7 +46,10 @@ namespace PMPoshanWebApp.Controllers
                 Approaches = approachesContent,
                 Objectives = objectivesContent,
                 Links = links,
-                Notification = notification
+                Notifications = notification,
+                Events = events,
+                PhotoAlbums = photoAlbum,
+                VideoAlbums = videoAlbum
             };
 
 
@@ -54,6 +57,40 @@ namespace PMPoshanWebApp.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> LoadEvents(int page = 1)
+        {
+            var events = await _emisApiClient.GetEventsPaged(page, 5, "");
+            return PartialView("_EventsPartial", events);
+        }
+        public async Task<IActionResult> EventsListPartial(int eventPage = 1)
+        {
+            var events = await _emisApiClient.GetEventsPaged(eventPage, 5, "");
+
+            var model = new CustomEventModel
+            {
+                EventList = events.EventList,
+                PagingInfo = events.PagingInfo
+            };
+
+            return PartialView("_EventsPartial", model);
+        }
+
+        public async Task<IActionResult> NotificationsListPartial(int notificationPage = 1)
+        {
+            var notifications = await _emisApiClient.GetNotificationPaged(notificationPage, 5, "");
+
+            var model = new CustomNotificationModel
+            {
+                NotificationList = notifications.NotificationList,
+                PagingInfo = notifications.PagingInfo
+            };
+
+            return PartialView("_NotificationsPartial", model);
+        }
+
+
+
 
         public IActionResult Privacy()
         {

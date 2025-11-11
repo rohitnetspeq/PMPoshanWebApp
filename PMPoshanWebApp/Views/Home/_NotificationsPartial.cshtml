@@ -1,0 +1,29 @@
+﻿@model PMPoshanWebApp.Integrations.EMIS.Models.CustomNotificationModel
+
+<div class="space-y-4">
+
+    @if (Model?.NotificationList != null && Model.NotificationList.Any())
+    {
+        foreach (var item in Model.NotificationList)
+        {
+            <div class="rounded-lg border p-4 bg-white shadow-sm">
+                <h3 class="font-semibold text-text-body">@item.NotificationTitle</h3>
+
+                <p class="mt-1 text-sm text-text-body/80">
+                    Click below to view full notification/document.
+                </p>
+
+                <a href="/File/Download?fileName=@item.FilePath" target="_blank"
+                   class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent transition">
+                    View →
+                </a>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-sm text-gray-500">No notifications available.</p>
+    }
+
+    @await Html.PartialAsync("_NotificationsPagination", Model)
+</div>

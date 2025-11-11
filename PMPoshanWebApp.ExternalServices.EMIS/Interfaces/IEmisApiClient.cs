@@ -13,11 +13,11 @@ namespace PMPoshanWebApp.Integrations.EMIS.Interfaces
         Task<CustomKCMSModel> GetCMSContentByName(string contnentName);
         Task<List<CustomLinkViewModel>> GetAllLinks();
         Task<CustomNotificationModel> GetNotificationPaged(int pageno, int pagesize, string searchTerm);
-        //Task<CustomPhotoAlbumModel> GetPhotoAlbumsPaged(int pageno, int pagesize, string searchTerm);
-        //Task<CustomPhotoAlbumInfoViewModel> GetAlbumPhotosById(long photosById);
-        //Task<CustomEventModel> GetEventsPaged(int pageno, int pagesize, string searchTerm);
+        Task<CustomPhotoAlbumModel> GetPhotoAlbumsPaged(int pageno, int pagesize, string searchTerm);
+        Task<List<CustomPhotoAlbumInfoViewModel>> GetAlbumPhotosById(long photosById);
+        Task<CustomEventModel> GetEventsPaged(int pageno, int pagesize, string searchTerm);
         //Task<EventViewModel> GetEventById(long eventId);
-        //Task<CustomVideoModel> GetVideoAlbumsPaged(int pageno, int pagesize, string searchTerm);
-        //Task<VideoInfoViewModel> GetAlbumVideosById(long videoId);
+        Task<CustomVideoModel> GetVideoAlbumsPaged(int pageno, int pagesize, string searchTerm);
+        Task<List<VideoInfoViewModel>> GetAlbumVideosById(long videoId);
     }
 }

@@ -1,0 +1,136 @@
+﻿@model PMPoshanWebApp.Integrations.EMIS.Models.PhotoVM
+
+@{
+    ViewData["Title"] = "Photo Album";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="max-w-7xl mx-auto mt-6 px-4">
+    <!-- Breadcrumbs -->
+    <div class="mb-4 flex flex-wrap items-center gap-2">
+        <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="/">Home</a>
+        <span class="text-sm text-gray-400 dark:text-gray-500">/</span>
+        <span class="text-sm font-medium text-gray-800 dark:text-gray-200">Gallery</span>
+    </div>
+    <!-- PageHeading -->
+    <div class="mb-8 flex flex-wrap items-baseline justify-between gap-4">
+        <h1 class="text-3xl font-bold text-primary md:text-4xl">Photo Gallery</h1>
+    </div>
+    <!-- ImageGrid -->
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        @if (Model.PhotoAlbums?.Albums != null && Model.PhotoAlbums.Albums.Any())
+        {
+            foreach (var item in Model.PhotoAlbums.Albums)
+            {
+                <a class="group flex flex-col overflow-hidden rounded-xl bg-[#faf7f2] shadow-md transition-all hover:shadow-xl dark:hover:shadow-primary/20"
+                   href="/photos/photogallery?albumId=@item.PhotoAlbumID">
+
+
+                    <div class="h-70 md:h-40 w-85 bg-cover bg-center rounded-lg transition-transform duration-300 group-hover:scale-105 bg-[#faf7f2]"
+                         style="background-image: url('@item.CoverThumb');"
+                         title="@item.PhotoAlbumDesc">
+                    </div>
+                    <div class="p-5 bg-[#faf7f2]">
+                        <p class="text-lg font-bold text-gray-900 dark:text-gray-500">
+                            @item.PhotoAlbumDesc
+                        </p>
+                        <div class="mt-3 flex items-center justify-between bg-[#faf7f2] text-sm text-gray-500 dark:text-gray-400">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">photo_camera</span>
+                                <span>@item.PhotoCount Photos</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            <p class="text-center col-span-full text-gray-500">No Albums Found</p>
+        }
+    </div>
+    <!-- Pagination -->
+    @if (Model.PhotoAlbums?.PagingInfo != null && Model.PhotoAlbums.PagingInfo.TotalPages > 1)
+    {
+        var paging = Model.PhotoAlbums.PagingInfo;
+
+        <div class="mt-12 flex items-center justify-center p-4">
+            <nav class="flex items-center gap-2">
+
+                <!-- Previous -->
+                @if (paging.CurrentPage > 1)
+                {
+                    <a href="@Url.Action("Index", new { pageNo = paging.CurrentPage - 1 })"
+                       class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-200 ">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                        <span class="hidden sm:inline">Previous</span>
+                    </a>
+                }
+
+                @{
+                    int totalPages = paging.TotalPages;
+                    int currentPage = paging.CurrentPage;
+                    int windowSize = 1;
+
+                    int startPage = Math.Max(1, currentPage - windowSize);
+                    int endPage = Math.Min(totalPages, currentPage + windowSize);
+                }
+
+                <!-- First page + ellipsis -->
+                @if (startPage > 1)
+                {
+                    <a href="@Url.Action("Index", new { pageNo = 1 })"
+                       class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600  hover:bg-gray-200 ">1</a>
+
+                    @if (startPage > 2)
+                    {
+                        <span class="px-2 text-gray-500">...</span>
+                    }
+                }
+
+                <!-- Middle pages -->
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    if (i == currentPage)
+                    {
+                        <a href="@Url.Action("Index", new { pageNo = i })"
+                           class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">@i</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", new { pageNo = i })"
+                           class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 ">@i</a>
+                    }
+                }
+
+                <!-- Last page + ellipsis -->
+                @if (endPage < totalPages)
+                {
+                    @if (endPage < totalPages - 1)
+                    {
+                        <span class="px-2 text-gray-500">...</span>
+                    }
+
+                    <a href="@Url.Action("Index", new { pageNo = totalPages })"
+                       class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 ">@totalPages</a>
+                }
+
+                <!-- Next -->
+                @if (paging.CurrentPage < paging.TotalPages)
+                {
+                    <a href="@Url.Action("Index", new { pageNo = paging.CurrentPage + 1 })"
+                       class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-200 ">
+                        <span class="hidden sm:inline">Next</span>
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </a>
+                }
+
+            </nav>
+        </div>
+    }
+    
+</div>
+

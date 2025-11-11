@@ -1,0 +1,83 @@
+﻿@using PMPoshanWebApp.Helpers
+@model PMPoshanWebApp.Integrations.EMIS.Models.VideoGallery
+@{
+    ViewData["Title"] = "Video Gallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<main class="flex-grow p-4 sm:p-6">
+    <div class="max-w-7xl mx-auto">
+
+    @* flex flex-col gap-4 py-6 px-2 sm:px-4 *@
+    <div class="mb-4">
+        <a href="/videos?pageNo=1" class="inline-flex items-center text-sm text-gray-600 dark:text-gray-300 hover:text-accent">
+            <span class="material-symbols-outlined text-base mr-1">arrow_back</span>
+            Back
+        </a>
+    </div>
+    <!-- Breadcrumbs -->
+    <div class="flex flex-wrap gap-2">
+        <a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-accent"
+           href="#">Home</a>
+        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span>
+        <a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-accent"
+           href="#">Video Gallery</a>
+        @* <span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span> *@
+        @* <span class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">
+            Annual
+            School Nutrition Fair 2023
+        </span> *@
+    </div>
+    <!-- PageHeading -->
+    @* <div class="flex flex-wrap justify-between gap-3">
+        <div class="flex min-w-72 flex-col gap-2">
+            <p class="text-3xl font-bold text-primary md:text-4xl">
+                Annual School Nutrition Fair 2023
+            </p>
+
+        </div>
+    </div> *@
+
+    <!-- ImageGrid adapted for Video -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-4">
+
+        @if (Model.Videos != null && Model.Videos.Any())
+        {
+            foreach (var item in Model.Videos)
+            {
+                var thumbnail = YoutubeHelper.GetYoutubeThumbnail(item.VideoLink);
+
+                <div class="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-xl">
+                    <a href="@item.VideoLink" target="_blank" class="absolute inset-0">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                             style='background-image: url("@thumbnail");'>
+                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="flex size-14 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                                <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <p class="text-white text-base font-bold leading-tight line-clamp-2">
+                                @item.VideoCaption
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-center text-gray-500 col-span-full">No Videos Found</p>
+        }
+
+        
+    </div>
+    
+    </div>
+</main>

@@ -5,9 +5,14 @@ namespace PMPoshanWebApp.Controllers
     public class FileController : Controller
     {
         private readonly IWebHostEnvironment _env;
-        public FileController(IWebHostEnvironment env)
+        private readonly IConfiguration _configuration;
+        private readonly HttpClient _httpClient;
+
+        public FileController(IHttpClientFactory httpClientFactory, IWebHostEnvironment env, IConfiguration configuration)
         {
+            _httpClient = httpClientFactory.CreateClient();
             _env = env;
+            _configuration = configuration;
         }
 
         //public IActionResult Index()
@@ -18,31 +23,57 @@ namespace PMPoshanWebApp.Controllers
         [HttpGet("File/Download")]
         public async Task<IActionResult> Download(string fileName)
         {
-            // You can add your security checks here, e.g.:
-            // - Check if user is authorized
-            // - Check if fileName is valid/safe
-            // - Log the download attempt
-
-            if (string.IsNullOrEmpty(fileName))
-                return BadRequest();
-
-            // Build full path to the file on server
-            var filePath = Path.Combine(_env.WebRootPath, "notification_files", fileName);
-
-            if (!System.IO.File.Exists(filePath))
-                return NotFound();
-
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(filePath, FileMode.Open))
+            try
             {
-                await stream.CopyToAsync(memory);
+                if (string.IsNullOrWhiteSpace(fileName))
+                    return BadRequest("File name is required.");
+
+                // Security: Extract only the file name (last part of the path)
+                var safeFileName = Path.GetFileName(fileName);
+
+                if (safeFileName != fileName && !fileName.EndsWith("/" + safeFileName))
+                    return BadRequest("Invalid file name.");
+
+                // Build correct external URL
+                var baseUrl = _configuration["EmisApi:WebUrl"].TrimEnd('/');
+                var fileUrl = $"{baseUrl}{fileName}"; // IMPORTANT: use filePath as-is
+
+                var response = await _httpClient.GetAsync(fileUrl);
+
+                if (!response.IsSuccessStatusCode)
+                    return NotFound("File not found.");
+
+                var fileBytes = await response.Content.ReadAsByteArrayAsync();
+                var contentType = response.Content.Headers.ContentType?.MediaType ?? GetContentType(safeFileName);
+
+                return File(fileBytes, contentType);
             }
-            memory.Position = 0;
+            catch
+            {
+                return StatusCode(500, "An error occurred while downloading the file.");
+            }
+        }
 
-            // Determine content type (you can use a better way here)
-            var contentType = "application/octet-stream";
 
-            return File(memory, contentType, Path.GetFileName(filePath));
+        private string GetContentType(string fileName)
+        {
+            var extension = Path.GetExtension(fileName).ToLowerInvariant();
+            return extension switch
+            {
+                ".pdf" => "application/pdf",
+                ".doc" => "application/msword",
+                ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ".xls" => "application/vnd.ms-excel",
+                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                ".png" => "image/png",
+                ".jpg" or ".jpeg" => "image/jpeg",
+                ".gif" => "image/gif",
+                ".txt" => "text/plain",
+                ".csv" => "text/csv",
+                ".zip" => "application/zip",
+                ".rar" => "application/x-rar-compressed",
+                _ => "application/octet-stream"
+            };
         }
     }
 

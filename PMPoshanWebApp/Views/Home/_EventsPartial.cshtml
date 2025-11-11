@@ -1,0 +1,27 @@
+﻿@model PMPoshanWebApp.Integrations.EMIS.Models.CustomEventModel
+
+
+<div id="eventsListContainer" class="space-y-4">
+    @if (Model?.EventList != null && Model.EventList.Any())
+    {
+        foreach (var item in Model.EventList)
+        {
+            <div class="rounded-lg border p-4">
+                <h3 class="font-semibold text-text-body">@item.EventTitle</h3>
+                <p class="mt-1 text-sm text-text-body/80">
+                    @item.EventDate.ToString("MMMM dd, yyyy")
+                </p>
+                <a href="/File/Download?fileName=@item.FilePath" target="_blank"
+                   class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent">
+                    View →
+                </a>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-sm text-gray-500">No Events available.</p>
+    }
+
+    @Html.Partial("_EventsPagination", Model)
+</div>

@@ -1,0 +1,87 @@
+﻿@model PMPoshanWebApp.Integrations.EMIS.Models.CustomNotificationModel
+
+@if (Model?.PagingInfo != null && Model.PagingInfo.TotalPages > 1)
+{
+    var paging = Model.PagingInfo;
+    int totalPages = paging.TotalPages;
+    int currentPage = paging.CurrentPage;
+    int windowSize = 1;
+    int startPage = Math.Max(1, currentPage - windowSize);
+    int endPage = Math.Min(totalPages, currentPage + windowSize);
+
+    <div class="mt-8 flex items-center justify-center p-4">
+        <nav class="flex items-center gap-2">
+
+            <!-- Previous -->
+            @if (currentPage > 1)
+            {
+                <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = currentPage - 1 })"
+                   hx-target="#notifications-container"
+                   hx-swap="innerHTML"
+                   class="flex h-10 items-center justify-center px-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                    <span class="hidden sm:inline">Previous</span>
+                </a>
+            }
+
+            <!-- First Page -->
+            @if (startPage > 1)
+            {
+                <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = 1 })"
+                   hx-target="#notifications-container"
+                   hx-swap="innerHTML"
+                   class="flex h-10 w-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200">
+                    1
+                </a>
+
+                @if (startPage > 2)
+                {
+                    <span class="px-2 text-gray-500">...</span>
+                }
+            }
+
+            <!-- Window Pages -->
+            @for (int i = startPage; i <= endPage; i++)
+            {
+                if (i == currentPage)
+                {
+                    <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white font-bold">@i</span>
+                }
+                else
+                {
+                    <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = i })"
+                       hx-target="#notifications-container"
+                       hx-swap="innerHTML"
+                       class="flex h-10 w-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200">@i</a>
+                }
+            }
+
+            <!-- Last Page -->
+            @if (endPage < totalPages)
+            {
+                @if (endPage < totalPages - 1)
+                {
+                    <span class="px-2 text-gray-500">...</span>
+                }
+
+                <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = totalPages })"
+                   hx-target="#notifications-container"
+                   hx-swap="innerHTML"
+                   class="flex h-10 w-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200">@totalPages</a>
+            }
+
+            <!-- Next -->
+            @if (currentPage < totalPages)
+            {
+                <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = currentPage + 1 })"
+                   hx-target="#notifications-container"
+                   hx-swap="innerHTML"
+                   class="flex h-10 items-center justify-center px-2 rounded-lg text-sm font-medium hover:bg-gray-200">
+                    <span class="hidden sm:inline">Next</span>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </a>
+            }
+
+        </nav>
+    </div>
+}

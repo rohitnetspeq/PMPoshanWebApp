@@ -101,5 +101,105 @@ namespace PMPoshanWebApp.Integrations.EMIS.Services
                 throw new Exception($"Error calling EMIS API: {ex.Message}", ex);
             }
         }
+
+        public async Task<CustomEventModel> GetEventsPaged(int pageno, int pagesize, string searchTerm = "")
+        {
+            try
+            {
+                var requestUrl = $"pmpgeneralapi/GeneralPublicPMP/GetPublicEventsPaged?pageno={pageno}&pagesize={pagesize}&searchTerm={searchTerm}";
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<CustomEventModel>(json)
+                       ?? new CustomEventModel();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error calling EMIS API: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<CustomPhotoAlbumModel> GetPhotoAlbumsPaged(int pageno, int pagesize, string searchTerm = "")
+        {
+            try
+            {
+                var requestUrl = $"pmpgeneralapi/GeneralPublicPMP/GetPublicPhotoAlbumsPaged?pageno={pageno}&pagesize={pagesize}&searchTerm={searchTerm}";
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<CustomPhotoAlbumModel>(json)
+                       ?? new CustomPhotoAlbumModel();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error calling EMIS API: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<List<CustomPhotoAlbumInfoViewModel>> GetAlbumPhotosById(long photosById)
+        {
+            try
+            {
+                var requestUrl = $"pmpgeneralapi/GeneralPublicPMP/GetPublicAlbumPhotosById?id={photosById}";
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<List<CustomPhotoAlbumInfoViewModel>>(json)
+                       ?? new List<CustomPhotoAlbumInfoViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error calling EMIS API: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<CustomVideoModel> GetVideoAlbumsPaged(int pageno, int pagesize, string searchTerm = "")
+        {
+            try
+            {
+                var requestUrl = $"pmpgeneralapi/GeneralPublicPMP/GetPublicVideoAlbumsPaged?pageno={pageno}&pagesize={pagesize}&searchTerm={searchTerm}";
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<CustomVideoModel>(json)
+                       ?? new CustomVideoModel();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error calling EMIS API: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<List<VideoInfoViewModel>> GetAlbumVideosById(long videoId)
+        {
+            try
+            {
+                var requestUrl = $"pmpgeneralapi/GeneralPublicPMP/GetPublicAlbumVideosById?id={videoId}";
+                var response = await _httpClient.GetAsync(requestUrl);
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<List<VideoInfoViewModel>>(json)
+                       ?? new List<VideoInfoViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error calling EMIS API: {ex.Message}", ex);
+            }
+        }
     }
 }

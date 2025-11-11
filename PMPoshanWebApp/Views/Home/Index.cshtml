@@ -1,5 +1,6 @@
 ﻿@using System.Net
 @using System.IO
+@using PMPoshanWebApp.Helpers
 @model PMPoshanWebApp.Integrations.EMIS.Models.HomePageViewModel
 @{
     ViewData["Title"] = "Home Page";
@@ -13,7 +14,15 @@
         content: "";
         margin-bottom: 0.6rem;
     }
+
+    .gallery-tab.active {
+        background-color: #0d47a1 ;
+        color: white;
+        border-color: #0d47a1;
+    }
 </style>
+
+
 
 @await Html.PartialAsync("_pvHeroSection", Model.Banners)
 
@@ -100,8 +109,8 @@
     </div>
 </section>
 
-<!-- Meal Rates & Events Section -->
-<section class="py-16 md:py-24 bg-background-light" id="events">
+<!-- Latest Rates and Links -->
+<section class="py-16 md:py-24 bg-background-light" id="rates-links">
     <div class="container mx-auto max-w-5xl px-4 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
             <h2 class="text-3xl font-bold text-primary md:text-4xl">
@@ -186,7 +195,7 @@
             <!-- OUR OBJECTIVE -->
             <div class="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6 md:p-8">
                 <div class="aspect-video rounded-xl bg-cover bg-center mb-6"
-                     style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuBen7SFGz_aVBg4PxMgmf4N_RJ0wtHiaxRta6jdaJYpWOsZPsH7PzCYTQeuR501FugTRIqTELVo7KB0yOTgBePIqtNMugU8tXV0a344ayuOa0a-TO458o9LsO-6_yoNxz8TlicnoHjQ06plZmLjtKc2tAZImNll_Yal-4ay6LHFur74qSLhky8xwwEDqc2CpOmgtc13CYPsMz5oHIbFlwe4fYb5oL_pR_jvfMVLruGsMcB4QR5KsUVK3nrdn_Xct5DOlPDY19rvFok');">
+                     style="background-image:url('@Model.Objectives.KCMImageThumb');">
                 </div>
                 <h2 class="text-3xl font-bold text-primary md:text-4xl">@Model.Objectives.KCMContentName</h2>
                 <p class="mt-4 text-base leading-relaxed text-text-body">
@@ -199,7 +208,7 @@
             <!-- OUR APPROACH -->
             <div class="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6 md:p-8">
                 <div class="aspect-video rounded-xl bg-cover bg-center mb-6"
-                     style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuBen7SFGz_aVBg4PxMgmf4N_RJ0wtHiaxRta6jdaJYpWOsZPsH7PzCYTQeuR501FugTRIqTELVo7KB0yOTgBePIqtNMugU8tXV0a344ayuOa0a-TO458o9LsO-6_yoNxz8TlicnoHjQ06plZmLjtKc2tAZImNll_Yal-4ay6LHFur74qSLhky8xwwEDqc2CpOmgtc13CYPsMz5oHIbFlwe4fYb5oL_pR_jvfMVLruGsMcB4QR5KsUVK3nrdn_Xct5DOlPDY19rvFok');">
+                     style="background-image:url('@Model.Approaches.KCMImageThumb');">
                 </div>
                 <h2 class="text-3xl font-bold text-primary md:text-4xl">@Model.Approaches.KCMContentName</h2>
                 <p class="mt-4 text-base leading-relaxed text-text-body">
@@ -223,56 +232,12 @@
                 Events
             </h2>
             <div class="mt-6 space-y-4">
-                <div class="rounded-lg border p-4">
-                    <p class="text-xs font-semibold text-accent">
-                        October 26, 2023
-                    </p>
-                    <h3 class="font-semibold text-text-body">
-                        State Level Steering-cum-Monitoring Committee Meeting
-                    </h3>
-                    <p class="mt-1 text-sm text-text-body/80">
-                        A review meeting to discuss the progress and implementation
-                        of the scheme.
-                    </p>
-                    <a class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent"
-                       href="#">Read More →</a>
+                <div id="eventsListContainer">
+                    @await Html.PartialAsync("_EventsPartial", Model.Events)
                 </div>
-                <div class="rounded-lg border p-4">
-                    <p class="text-xs font-semibold text-accent">
-                        September 15, 2023
-                    </p>
-                    <h3 class="font-semibold text-text-body">
-                        New Menu Circular Released
-                    </h3>
-                    <p class="mt-1 text-sm text-text-body/80">
-                        Updated weekly menu for all schools to enhance nutritional
-                        diversity.
-                    </p>
-                    <a class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent"
-                       href="#">Read More →</a>
-                </div>
-                <!-- Pagination -->
-                <div class="mt-12 flex items-center justify-center p-4">
-                    <nav class="flex items-center gap-2">
-                        <a class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
-                           href="#">
-                            <span class="material-symbols-outlined">chevron_left</span>
-                            <span class="hidden sm:inline">Previous</span>
-                        </a>
-                        <a class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white"
-                           href="#">1</a>
 
-                        <a class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
-                           href="#">2</a>
-                        <a class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
-                           href="#">3</a>
-                        <a class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
-                           href="#">
-                            <span class="hidden sm:inline">Next</span>
-                            <span class="material-symbols-outlined">chevron_right</span>
-                        </a>
-                    </nav>
-                </div>
+                
+                
             </div>
         </div>
         <div>
@@ -284,149 +249,31 @@
 
             <div class="mt-6 space-y-4">
 
-                @if (Model.Notification?.NotificationList != null && Model.Notification.NotificationList.Any())
-                {
-                    foreach (var item in Model.Notification.NotificationList)
-                    {
-                        <div class="rounded-lg border p-4">
-                            <p class="text-xs font-semibold text-accent">
-                                <!-- If you later add a Date field, bind here -->
-                                @* Example: @item.CreatedDate.ToString("MMMM dd, yyyy") *@
-                                <!-- For now, just show title as provided -->
-                            </p>
-
-                            <h3 class="font-semibold text-text-body">
-                                @item.NotificationTitle
-                            </h3>
-
-                            <p class="mt-1 text-sm text-text-body/80">
-                                <!-- If you have description later, show here -->
-                                Click below to view full notification/document.
-                            </p>
-
-                            @* <a class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent"
-                               href="@Url.Action("Download", "File", new { fileName = Path.GetFileName(item.FilePath) })" target="_blank" rel="noopener noreferrer">
-                                Read More →
-                            </a> *@
+                <div id="notifications-container">
+                    @await Html.PartialAsync("_NotificationsPartial", Model.Notifications)
+                </div>
 
 
-                            <a class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent"
-                               href="@ViewData["WebFileBaseUrl"]@item.FilePath" target="_blank" rel="noopener noreferrer">
-                                Read More →
-                            </a>
-                        </div>
-                    }
-                }
-                else
-                {
-                    <p class="text-sm text-gray-500">No notifications available.</p>
-                }
 
-                <!-- ✅ Pagination -->
-                @if (Model.Notification?.PagingInfo != null && Model.Notification.PagingInfo.TotalPages > 1)
-                {
-                    var paging = Model.Notification.PagingInfo;
-                    <div class="mt-12 flex items-center justify-center p-4">
-                        <nav class="flex items-center gap-2">
-                            <!-- Previous -->
-                            @if (paging.CurrentPage > 1)
-                            {
-                                <a href="@Url.Action("Index", new { page = paging.CurrentPage - 1 })"
-                                   class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
-                                    <span class="material-symbols-outlined">chevron_left</span>
-                                    <span class="hidden sm:inline">Previous</span>
-                                </a>
-                            }
-
-                            <!-- Page Numbers -->
-                            @for (int i = 1; i <= paging.TotalPages; i++)
-                            {
-                                if (i == paging.CurrentPage)
-                                {
-                                    <a href="@Url.Action("Index", new { page = i })"
-                                       class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-                                        @i
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a href="@Url.Action("Index", new { page = i })"
-                                       class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800">
-                                        @i
-                                    </a>
-                                }
-                            }
-
-                            <!-- Next -->
-                            @if (paging.CurrentPage < paging.TotalPages)
-                            {
-                                <a href="@Url.Action("Index", new { page = paging.CurrentPage + 1 })"
-                                   class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
-                                    <span class="hidden sm:inline">Next</span>
-                                    <span class="material-symbols-outlined">chevron_right</span>
-                                </a>
-                            }
-                        </nav>
-                    </div>
-                }
             </div>
 
-            <div class="mt-6 space-y-4">
-                <div class="rounded-lg border p-4">
-                    <p class="text-xs font-semibold text-accent">
-                        October 26, 2023
-                    </p>
-                    <h3 class="font-semibold text-text-body">
-                        State Level Steering-cum-Monitoring Committee Meeting
-                    </h3>
-                    <p class="mt-1 text-sm text-text-body/80">
-                        A review meeting to discuss the progress and implementation
-                        of the scheme.
-                    </p>
-                    <a class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent"
-                       href="#">Read More →</a>
-                </div>
-                <div class="rounded-lg border p-4">
-                    <p class="text-xs font-semibold text-accent">
-                        September 15, 2023
-                    </p>
-                    <h3 class="font-semibold text-text-body">
-                        New Menu Circular Released
-                    </h3>
-                    <p class="mt-1 text-sm text-text-body/80">
-                        Updated weekly menu for all schools to enhance nutritional
-                        diversity.
-                    </p>
-                    <a class="mt-2 inline-block text-sm font-bold text-primary hover:text-accent"
-                       href="#">Read More →</a>
-                </div>
-                <!-- Pagination -->
-                <div class="mt-12 flex items-center justify-center p-4">
-                    <nav class="flex items-center gap-2">
-                        <a class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
-                           href="#">
-                            <span class="material-symbols-outlined">chevron_left</span>
-                            <span class="hidden sm:inline">Previous</span>
-                        </a>
-                        <a class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white"
-                           href="#">1</a>
-
-                        <a class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
-                           href="#">2</a>
-                        <a class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800"
-                           href="#">3</a>
-                        <a class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
-                           href="#">
-                            <span class="hidden sm:inline">Next</span>
-                            <span class="material-symbols-outlined">chevron_right</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
+            
         </div>
     </div>
 </section>
+
+@* fsa *@
+
+
+
+
+<!---->
+
+
 <!-- Photo Gallery Section -->
+
+
+
 
 <section class="py-16 md:py-24 bg-background-alt" id="gallery">
     <div class="container mx-auto max-w-5xl px-4">
@@ -434,49 +281,130 @@
             Gallery
         </h2>
 
-        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
-            <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg"
-                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDZd7Ghj52DHiKTdgxrdjxJfI4FRR9kZrf_VQ-t5TiQEZMe0ev6uoKDLvUxfVaSGWshjLwLFmalt1DBCTMd4FP019oBrjdDWOBxPOwExkIhnAiZYBqY3iyVJ7kqEwoeiUqxBCrLjjEOqMrseC5c7pfXizgT4xzeh_yHNsaVLYmiuC8Y6QN9WBI4AIQMetYqI9wWf_Pz9LiDDaRcJHggI32ZOBq8ptJ7GTWqFA0QB5ZRHlBPgpSEzem12EqT65uvCT6ffUfy-cm5AR_A');">
-            </div>
-
-            <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg"
-                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB-5_vPDnk6bPI58pFfGfi131MgvVr2rUEesstgh-AnKxYPEKR0NDRoFlPRkGGkfYCjW0S5PtHMLGXeDul7uGACcTknvKkIlVK1Tog8LRs5-GUdfb8oOxQNbTHwDe6IJgTBZ8SYl8nc2sLbYsxsANv44gGJqeHQd9UQZniABx-Q_xuAQohvlh3_zYRoC-I8xb2Gz4BUs9o5fxcSSSZ4J-ieRD6u5vV4ExzPO_ZswXaZhIpGPr6e1k3LFWcqPrGBOowmcGQKC2LMmv6o');">
-            </div>
-
-            <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg"
-                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_PRN_g0UpUaSFCUlh3-X-5IWePXQyoCYgPt4gpzlpQxFyl1F6u2foGONkbJ9h8inexMBYpHqDgLJn-KAerwFqeNrqpIahcHsMJpqnlB9nqRKd6v6fOSK7EJJHdjZXVPdimj7lmL62E4k_YR22LRfrUmfA9XohiI_Wsz21NeFI5bf21CbOQy7ly_7NExbD5zDj0DEUU_0tfsQE8pMH-II8hcFM8x_MCebn33LQxvtJGLkTslwLC47WSLPjxMGSn8z3usraQ4Md0jIA');">
-            </div>
-
-            <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg"
-                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpv-CDM3dQ2Q3pesFJdfr6eDGgRexfAXEB4asHP-8R5fJcufFv4jXGU0zNY9GcWFlinGy7jW3pEUJuSuzVghlh8i0ZyVnVdr7mh8hVvI43ieSA27Oc1-t7RUfgKem8mjDov2evmPKgBURBHJW1ArXJObit8rdzRAaqxSjYjtCoOfL1_g0_nhTT_VTvdBFj32SRMKhsmaT_neWbLZr5T0V5RoY6huKXxBgqoQRxdlxG-tTgUx2_3AUKd68C6ADP7DYd4lnxIUGugidy');">
-            </div>
-
-            <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg"
-                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNbpSXDZilSE75azyn6au4wa-R09goAJGLAGFLJ-WqYGMUdfzIkb7yXX6gQPZFTNMlY_gqnTJSoaS1bBR8724I_2k62rZ2hwgOG8lpdwO_xoO_nDviPB8RZrGT6MGbHEq0LMqsAc49fZxVM5keot_BECsXoHMdavezCOeDnaVQXpqAPRw7G6zFSjTn54PpMcQ9_io8pVZCNlHuG1aPYeojMqlFM3QTN9SrcDbhEOPxYsZp6L8vY817BaWzpNjpsZMgxhTs-GzgblAA');">
-            </div>
-
-            <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg"
-                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDhuOSF0s6OBvoThjfBW-huQ2kXl9n9QVcBXad-fadU7emJFaaA8zg8J78rfSTvLyUKO30K65u_ZIjpdWmryPtt7dCe8z_xz_L8ofY84hppabWh4Q3UnJmIZYJit6_lol2t09Ox8Jqxz8OeIGVa_iM-jq2XfE8Qx1gtx6IH8h7JQo2UI_VVC1AXLTQTCJl_kKXNGYvcX_M__1kPc3xxVGy4tTZFbAUWn5LTb8OUx5odPXts96uB1u452ExFGHwMmDqvsRVyEaOPsIyM');">
-            </div>
-
-            <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg"
-                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsk4_4Owjtj7qTxLZfl2MpC3P9LSK7xUBpAPiZmnNuR44xc5BPJxHkZ2HJB67draTbl6DPUbfCrmstcML45LSZH0Y3SrnxXg943j0fv_c9pPTfy-h5mrLD8bLd-fOcM1lXbo-Q8PhDB_v2wHASDfb6EqRAJh2lL28YGlPRwBDnMx9qvnIKd1l6ZAuhjEpLdNx8qbtDPDx4Nnc8SZQ8619fK47XE70aD-8vB_fmz4Okfm_AtZuD5UeA0QYnkyiumEC5u0-w8r447Ryc');">
-            </div>
-
-            <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg"
-                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAI7gtU8Rv2SmI0zasAd5E3G6jzCQZle1pCOwh01glDkkB0jzJgjuUcELIqp2Uz-iyTcZX7NnveG_bEbUnpMxYVrW7nmIDHvEeDVrfuvJiN8Ma7GF96WfxFX28bxpytBPi4R71KSgNAV3PC64TI7ftS-cECAG7wkbKjHlKFYu8acskNVW9jOL3gB_kj__XxlnU2-stUVvmQ42JNI2zwU7Z1Y1xGxnZiIe4BVuPBsQNRe0Ve7_QONmBcQRAXP1hfE_nIw_TJnkgDAJxB');">
-            </div>
-
-
-
-        </div>
-
-        <div class="flex justify-center mt-8">
-            <button class="relative z-[2] flex h-12 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl px-5 bg-accent text-white text-base font-bold leading-normal tracking-wide transition-transform hover:scale-105">
-                <span class="truncate">View More</span>
+        <div class="flex items-center justify-center gap-4 mb-10 mt-8">
+            <button class="gallery-tab active px-6 py-2 rounded-full border border-primary text-primary font-medium hover:bg-primary hover:text-white transition" data-target="all">
+                All
+            </button>
+            <button class="gallery-tab px-6 py-2 rounded-full border border-primary text-primary font-medium hover:bg-primary hover:text-white transition" data-target="photos">
+                Photos
+            </button>
+            <button class="gallery-tab px-6 py-2 rounded-full border border-primary text-primary font-medium hover:bg-primary hover:text-white transition" data-target="videos">
+                Videos
             </button>
         </div>
 
-    </div>
 
+        <!-- PHOTOS GRID -->
+        <div id="photosGrid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
+            @if (Model.PhotoAlbums?.Albums != null)
+            {
+                foreach (var album in Model.PhotoAlbums.Albums)
+                {
+                    <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg transition-transform duration-300 group-hover:scale-105"
+                         style="background-image: url('@album.CoverThumb');"
+                         title="@album.PhotoAlbumDesc">
+                    </div>
+                }
+            }
+        </div>
+
+        <!-- VIDEOS GRID (Hidden by default) -->
+        <div id="videosGrid" class="hidden grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
+            @if (Model.VideoAlbums?.Albums != null)
+            {
+                foreach (var video in Model.VideoAlbums.Albums)
+                {
+                    var thumbnail = YoutubeHelper.GetYoutubeThumbnail(video.VideoCoverLink);
+
+                    <a href="@video.VideoCoverLink" target="_blank" rel="noopener noreferrer" class="group block" title="@video.VideoAlbumDesc">
+                        <div class="relative w-full aspect-video rounded-lg overflow-hidden">
+                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-300 group-hover:scale-105"
+                                 style='background-image: url("@thumbnail");'>
+                            </div>
+
+                            <!-- Play Overlay -->
+                            <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-white text-5xl opacity-80 group-hover:opacity-100 transition-opacity">
+                                    play_circle
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+        </div>
+
+
+
+        @* <div id="videosGrid" class="hidden grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
+            @if (Model.VideoAlbums?.Albums != null)
+            {
+                foreach (var video in Model.VideoAlbums.Albums)
+                {
+                    <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg relative"
+                         style="background-image: url('@video.VideoCoverLink');"
+                         title="@video.VideoAlbumDesc">
+
+                        <!-- Play icon overlay -->
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white text-3xl">
+                            <i class="mdi mdi-play-circle"></i>
+                        </div>
+                    </div>
+                }
+            }
+        </div> *@
+
+        <div id="viewMoreWrapper" class="flex justify-center mt-8">
+            <button id="viewMoreBtn"
+                    class="relative z-[2] flex h-12 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl px-5 bg-accent text-white text-base font-bold hover:scale-105">
+                View More
+            </button>
+        </div>
+
+        
+
+
+
+    </div>
 </section>
+
+
+
+
+
+
+<script>
+    document.querySelectorAll('.gallery-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const type = btn.getAttribute('data-target');
+
+            document.querySelectorAll('.gallery-tab').forEach(x => x.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.getElementById('photosGrid').classList.toggle('hidden', type !== 'all' && type !== 'photos');
+            document.getElementById('videosGrid').classList.toggle('hidden', type !== 'all' && type !== 'videos');
+
+            const viewMore = document.getElementById('viewMoreWrapper');
+            if (type === 'all') viewMore.classList.add('hidden');
+            else viewMore.classList.remove('hidden');
+        });
+    });
+
+    // **Trigger default state on load**
+    document.querySelector('.gallery-tab.active').click();
+
+    document.getElementById('viewMoreBtn').addEventListener('click', function () {
+        const activeTab = document.querySelector('.gallery-tab.active')?.getAttribute('data-target');
+
+        if (activeTab === 'photos') {
+            window.location.href = '/photos?pageNo=1';
+        }
+        else if (activeTab === 'videos') {
+            window.location.href = '/videos?pageNo=1';
+        }
+        else {
+            window.location.href = '/photos?pageNo=1';
+        }
+    });
+</script>
+

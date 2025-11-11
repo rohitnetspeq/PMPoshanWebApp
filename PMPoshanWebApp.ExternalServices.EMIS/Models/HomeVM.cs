@@ -17,7 +17,10 @@ namespace PMPoshanWebApp.Integrations.EMIS.Models
         public CustomKCMSModel Objectives { get; set; }
         public CustomKCMSModel Approaches { get; set; }
         public List<CustomLinkViewModel> Links { get; set; }
-        public CustomNotificationModel Notification { get; set; }
+        public CustomNotificationModel Notifications { get; set; }
+        public CustomEventModel Events { get; set; }
+        public CustomPhotoAlbumModel PhotoAlbums { get; set; }
+        public CustomVideoModel VideoAlbums { get; set; }
 
     }
 
