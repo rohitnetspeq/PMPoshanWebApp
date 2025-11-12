@@ -1,4 +1,44 @@
-﻿<div class="w-full bg-primary text-white text-sm py-2 px-4 md:px-10 flex items-center justify-between">
+﻿<style>
+    html {
+        transition: font-size 0.2s ease;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+</style>
+@* 
+<div class="w-full bg-primary text-white text-sm py-2 px-4 md:px-10 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-white text-base">mail</span>
+        <a href="mailto:info@pmposhansikkim.gov.in" class="hover:underline">info@pmposhansikkim.gov.in</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+        <button class="flex items-center gap-1 hover:opacity-80 transition">
+            <span class="material-symbols-outlined text-white text-base">dark_mode</span>
+        </button>
+
+        <button id="text-decrease" class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
+            A<span class="text-xs align-top">-</span>
+        </button>
+
+        <button id="text-reset" class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
+            A
+        </button>
+
+        <button id="text-increase" class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
+            A<span class="text-xs align-top">+</span>
+        </button>
+
+        <button class="items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none pl-4">
+            Login
+        </button>
+    </div>
+</div>
+ *@
+
+<!---->
+<!-- 🔹 Top Bar -->
+<div class="w-full bg-primary text-white text-sm py-2 px-4 md:px-10 flex items-center justify-between">
 
     <div class="flex items-center gap-2">
         <span class="material-symbols-outlined text-white text-base">mail</span>
@@ -7,26 +47,143 @@
 
     <div class="flex items-center gap-3">
 
-        <button class="flex items-center gap-1 hover:opacity-80 transition">
-            <span class="material-symbols-outlined text-white text-base">dark_mode</span>
+        <!-- 🌙 Dark Mode Toggle -->
+        <button id="dark-toggle" class="flex items-center gap-1 hover:opacity-80 transition">
+            <span class="material-symbols-outlined text-white text-base" id="dark-icon">dark_mode</span>
         </button>
 
-        <button class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
+        <!-- 🔠 Font Size Controls -->
+        <button id="text-decrease" class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
             A<span class="text-xs align-top">-</span>
         </button>
 
-        <button class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
+        <button id="text-reset" class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
             A
         </button>
 
-        <button class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
+        <button id="text-increase" class="hidden md:flex items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none">
             A<span class="text-xs align-top">+</span>
         </button>
 
         <button class="items-center hover:opacity-80 transition text-white font-semibold text-sm leading-none pl-4">
             Login
         </button>
-
     </div>
-
 </div>
+
+<!-- 🌗 Functionality Script -->
+<script>
+    const root = document.documentElement;
+
+    /* =====================
+       FONT SIZE CONTROLLER
+    ===================== */
+    const defaultFontSize = 100;
+    let currentFontSize = parseInt(localStorage.getItem("fontSize")) || defaultFontSize;
+
+    root.style.fontSize = currentFontSize + "%";
+
+    const decreaseBtn = document.getElementById("text-decrease");
+    const resetBtn = document.getElementById("text-reset");
+    const increaseBtn = document.getElementById("text-increase");
+
+    decreaseBtn.addEventListener("click", () => {
+        if (currentFontSize > 80) {
+            currentFontSize -= 10;
+            updateFontSize();
+        }
+    });
+
+    resetBtn.addEventListener("click", () => {
+        currentFontSize = defaultFontSize;
+        updateFontSize();
+    });
+
+    increaseBtn.addEventListener("click", () => {
+        if (currentFontSize < 140) {
+            currentFontSize += 10;
+            updateFontSize();
+        }
+    });
+
+    function updateFontSize() {
+        root.style.fontSize = currentFontSize + "%";
+        localStorage.setItem("fontSize", currentFontSize);
+    }
+
+    /* =====================
+       DARK MODE TOGGLE
+    ===================== */
+    const darkToggle = document.getElementById("dark-toggle");
+    const darkIcon = document.getElementById("dark-icon");
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        enableDarkMode();
+    }
+
+    darkToggle.addEventListener("click", () => {
+        if (root.classList.contains("dark")) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    });
+
+    function enableDarkMode() {
+        root.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+        darkIcon.textContent = "light_mode"; // change icon
+    }
+
+    function disableDarkMode() {
+        root.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        darkIcon.textContent = "dark_mode";
+    }
+</script>
+
+
+<!---->
+
+@* 
+
+<script>
+    const root = document.documentElement;
+    const defaultFontSize = 100; // percentage
+    let currentFontSize = parseInt(localStorage.getItem("fontSize")) || defaultFontSize;
+
+    // Apply saved size on load
+    root.style.fontSize = currentFontSize + "%";
+
+    // Buttons
+    const decreaseBtn = document.getElementById("text-decrease");
+    const resetBtn = document.getElementById("text-reset");
+    const increaseBtn = document.getElementById("text-increase");
+
+    decreaseBtn.addEventListener("click", () => {
+      if (currentFontSize > 80) {
+        currentFontSize -= 10;
+        updateFontSize();
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      currentFontSize = defaultFontSize;
+      updateFontSize();
+    });
+
+    increaseBtn.addEventListener("click", () => {
+      if (currentFontSize < 140) {
+        currentFontSize += 10;
+        updateFontSize();
+      }
+    });
+
+    function updateFontSize() {
+      root.style.fontSize = currentFontSize + "%";
+      localStorage.setItem("fontSize", currentFontSize);
+    }
+</script>
+ *@

@@ -18,7 +18,7 @@
                 <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = currentPage - 1 })"
                    hx-target="#notifications-container"
                    hx-swap="innerHTML"
-                   class="flex h-10 items-center justify-center px-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200">
+                   class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-gray-200">
                     <span class="material-symbols-outlined">chevron_left</span>
                     <span class="hidden sm:inline">Previous</span>
                 </a>
@@ -30,7 +30,7 @@
                 <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = 1 })"
                    hx-target="#notifications-container"
                    hx-swap="innerHTML"
-                   class="flex h-10 w-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200">
+                   class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200">
                     1
                 </a>
 
@@ -52,7 +52,7 @@
                     <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = i })"
                        hx-target="#notifications-container"
                        hx-swap="innerHTML"
-                       class="flex h-10 w-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200">@i</a>
+                       class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200">@i</a>
                 }
             }
 
@@ -67,7 +67,7 @@
                 <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = totalPages })"
                    hx-target="#notifications-container"
                    hx-swap="innerHTML"
-                   class="flex h-10 w-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200">@totalPages</a>
+                   class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200">@totalPages</a>
             }
 
             <!-- Next -->
@@ -76,7 +76,7 @@
                 <a hx-get="@Url.Action("NotificationsListPartial", new { notificationPage = currentPage + 1 })"
                    hx-target="#notifications-container"
                    hx-swap="innerHTML"
-                   class="flex h-10 items-center justify-center px-2 rounded-lg text-sm font-medium hover:bg-gray-200">
+                   class="flex h-10 items-center justify-center px-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-gray-200">
                     <span class="hidden sm:inline">Next</span>
                     <span class="material-symbols-outlined">chevron_right</span>
                 </a>

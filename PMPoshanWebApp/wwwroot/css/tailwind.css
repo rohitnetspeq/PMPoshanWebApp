@@ -14,3 +14,12 @@
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
 }
+
+
+.dark {
+    --color-primary: #499ADB; /* lighter blue */
+    --color-accent: #ffa726; /* brighter accent */
+    --color-background-light: #121212; /* dark background */
+    --color-background-alt: #1e1e1e;
+    --color-text-body: #e0e0e0; /* light text */
+}
