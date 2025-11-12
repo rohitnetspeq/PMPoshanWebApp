@@ -300,10 +300,15 @@
             {
                 foreach (var album in Model.PhotoAlbums.Albums)
                 {
+                    <a href="/photos/photogallery?albumId=@album.PhotoAlbumID" target="_blank" rel="noopener noreferrer" class="group block" title="@album.PhotoAlbumDesc">
+
+                    <div class="relative w-full aspect-video rounded-lg overflow-hidden">
                     <div class="h-32 md:h-40 w-full bg-cover bg-center rounded-lg transition-transform duration-300 group-hover:scale-105"
                          style="background-image: url('@album.CoverThumb');"
                          title="@album.PhotoAlbumDesc">
                     </div>
+                    </div>
+                    </a>
                 }
             }
         </div>
@@ -316,7 +321,7 @@
                 {
                     var thumbnail = YoutubeHelper.GetYoutubeThumbnail(video.VideoCoverLink);
 
-                    <a href="@video.VideoCoverLink" target="_blank" rel="noopener noreferrer" class="group block" title="@video.VideoAlbumDesc">
+                    <a href="/videos/videogallery?albumId=@video.VideoAlbumID" target="_blank" rel="noopener noreferrer" class="group block" title="@video.VideoAlbumDesc">
                         <div class="relative w-full aspect-video rounded-lg overflow-hidden">
                             <div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-300 group-hover:scale-105"
                                  style='background-image: url("@thumbnail");'>
